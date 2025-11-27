@@ -20,6 +20,8 @@
 		"babel-loader": "^9.1.2",
 		"browser-sync": "^2.29.3",
 		"core-js": "^3.31.0",
+		"eslint": "^9.39.1",
+		"globals": "^16.5.0",
 		"gulp": "^4.0.2",
 		"webpack": "^5.86.0",
 		"webpack-stream": "^7.0.0"
