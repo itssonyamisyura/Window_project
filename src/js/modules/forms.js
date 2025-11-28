@@ -1,15 +1,12 @@
+import checkNumInputs from './checkNumInputs';
+
 // все формы на сайте собирают информацию внутри себя и отправляют на сервер
 
-const forms = () => {
+const forms = (state) => {
     const form = document.querySelectorAll('form'),
-          inputs = document.querySelectorAll('input'),
-          phoneInputs = document.querySelectorAll('input[name="user_phone"]');
+          inputs = document.querySelectorAll('input');
 
-    phoneInputs.forEach(item => {
-        item.addEventListener('input', () => {
-            item.value = item.value.replace(/\D/, ''); // если находит не число, заменяет пустым местом
-        })  
-    });
+    checkNumInputs('input[name="user_phone"]');
     
     const message = {
         loading: 'Загрузка...',
@@ -36,16 +33,19 @@ const forms = () => {
     
     form.forEach(item => {
         item.addEventListener('submit', (e) => {
-            
             e.preventDefault();
 
             let statusMessage = document.createElement('div');
             statusMessage.classList.add('status');
-
-            //помещаем блок в конец формы
             item.appendChild(statusMessage);
 
             const formData = new FormData(item);
+            if (item.getAttribute('data-calc') === "end") {
+                for (let key in state) {
+                    formData.append(key, state[key]);
+                }
+            }
+
 
             postData('assets/server.php', formData) // возврашается промис
                 .then(res => {// вернется res.text();
@@ -55,10 +55,16 @@ const forms = () => {
                 .catch(() => statusMessage.textContent = message.failure) 
                 .finally(() => {
                     clearInputs();
-                    setTimeout(() => {
-                        statusMessage.remove();
-                    }, 5000);// удаляем statusMessage через время
-                })  
+
+                if (item.getAttribute('data-calc') === "end") {
+                    const modal = document.querySelector('.popup_calc_end');
+                    if (modal) modal.style.display = 'none';
+                }
+
+                setTimeout(() => {
+                    statusMessage.remove();
+                }, 5000);// удаляем statusMessage через время
+            })  
         });
     });
 };

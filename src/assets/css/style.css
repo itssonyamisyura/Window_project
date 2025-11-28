@@ -1088,10 +1088,7 @@ textarea:focus {
 
 .popup_calc_profile_button {
   display: block;
-  margin-left: 50%;
-  -webkit-transform: translateX(-50%);
-  transform: translateX(-50%);
-  margin-top: 1rem;
+  margin: 1rem auto 0;
   padding: 1rem 5rem;
 }
 
@@ -1816,5 +1813,33 @@ textarea:focus {
     /*css animations*/
     -webkit-animation: none !important;
     animation: none !important;
+  }
+}
+
+.shake {
+  animation: shakeAnim 0.6s ease;
+}
+
+@keyframes shakeAnim {
+
+  10%,
+  90% {
+    transform: translateX(-2px);
+  }
+
+  20%,
+  80% {
+    transform: translateX(4px);
+  }
+
+  30%,
+  50%,
+  70% {
+    transform: translateX(-6px);
+  }
+
+  40%,
+  60% {
+    transform: translateX(6px);
   }
 }
