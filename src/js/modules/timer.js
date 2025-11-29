@@ -34,7 +34,8 @@ const timer = (id, deadline) => {
         minutes = timer.querySelector('#minutes'),
         seconds = timer.querySelector('#seconds'),
         timeInterval = setInterval(updateClock, 1000) //обновляет таймер каждую секунду
-        console.log(timer)
+
+        updateClock()
 
         function updateClock() { // сколько осталось до dedline
             const t = getTimeRemaining(endtime);

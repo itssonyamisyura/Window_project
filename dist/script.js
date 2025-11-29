@@ -13915,6 +13915,84 @@ const forms = state => {
 
 /***/ }),
 
+/***/ "./src/js/modules/images.js":
+/*!**********************************!*\
+  !*** ./src/js/modules/images.js ***!
+  \**********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+const images = () => {
+  // создание модального окна, общего блока для всех изображений и создаем изображение
+  const imgPopup = document.createElement('div'),
+    workSection = document.querySelector('.works'),
+    bigImage = document.createElement('img'),
+    images = workSection.querySelectorAll('.preview');
+  imgPopup.classList.add('popup');
+  workSection.appendChild(imgPopup);
+  imgPopup.style.justifyContent = 'center';
+  imgPopup.style.alignItems = 'center';
+  imgPopup.style.display = 'none';
+  imgPopup.appendChild(bigImage);
+  let currentIndex = 0;
+  workSection.addEventListener('click', e => {
+    e.preventDefault();
+    let target = e.target;
+
+    // открытие попапа
+    if (target && target.classList.contains('preview')) {
+      // if target(эл на котором произошло событие) supports click и содержит класс 
+
+      // записываем индекс нажатой картинки
+      currentIndex = Array.from(images).indexOf(target);
+      imgPopup.style.display = 'flex';
+      document.body.style.overflow = 'hidden'; // БЛОКИРУЕМ ПРОКРУТКУ
+
+      showImage(currentIndex);
+    }
+
+    // закрытие по клику на фон
+    if (target && target.matches('div.popup')) {
+      imgPopup.style.display = 'none';
+      document.body.style.overflow = ''; // ВОЗВРАЩАЕМ ПРОКРУТКУ
+    }
+  });
+
+  // показать картинку по индексу
+  function showImage(index) {
+    const path = images[index].parentNode.getAttribute('href');
+    bigImage.setAttribute('src', path);
+  }
+
+  // перелистывание по клавишам ← →
+  document.addEventListener('keydown', e => {
+    if (imgPopup.style.display === 'flex') {
+      if (e.key === 'ArrowRight') {
+        currentIndex = (currentIndex + 1) % images.length;
+        // ↑ следующая картинка, по кругу (последняя → первая)
+        showImage(currentIndex);
+      }
+      if (e.key === 'ArrowLeft') {
+        currentIndex = (currentIndex - 1 + images.length) % images.length;
+        // ↑ предыдущая картинка, по кругу (первая → последняя)
+        showImage(currentIndex);
+      }
+      if (e.key === 'Escape') {
+        imgPopup.style.display = 'none';
+        document.body.style.overflow = '';
+        // ↑ закрытие по Esc
+      }
+    }
+  });
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (images);
+
+/***/ }),
+
 /***/ "./src/js/modules/modals.js":
 /*!**********************************!*\
   !*** ./src/js/modules/modals.js ***!
@@ -14106,7 +14184,8 @@ const timer = (id, deadline) => {
       minutes = timer.querySelector('#minutes'),
       seconds = timer.querySelector('#seconds'),
       timeInterval = setInterval(updateClock, 1000); //обновляет таймер каждую секунду
-    console.log(timer);
+
+    updateClock();
     function updateClock() {
       // сколько осталось до dedline
       const t = getTimeRemaining(endtime);
@@ -14323,6 +14402,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_forms__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/forms */ "./src/js/modules/forms.js");
 /* harmony import */ var _modules_changeModalState__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/changeModalState */ "./src/js/modules/changeModalState.js");
 /* harmony import */ var _modules_timer__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/timer */ "./src/js/modules/timer.js");
+/* harmony import */ var _modules_images__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./modules/images */ "./src/js/modules/images.js");
+
 
 
 
@@ -14343,6 +14424,7 @@ window.addEventListener('DOMContentLoaded', () => {
   (0,_modules_tabs__WEBPACK_IMPORTED_MODULE_2__["default"])('.balcon_icons', '.balcon_icons_img', '.big_img > img', 'do_image_more', 'inline-block');
   (0,_modules_forms__WEBPACK_IMPORTED_MODULE_3__["default"])(modalState);
   (0,_modules_timer__WEBPACK_IMPORTED_MODULE_5__["default"])('.container1', deadline);
+  (0,_modules_images__WEBPACK_IMPORTED_MODULE_6__["default"])();
 });
 })();
 
