@@ -1,6 +1,6 @@
 # 🪟 Window Project
 
-A web application with modal windows, interactive UI elements, and dynamic content rendering.
+An interactive web application featuring modals, forms, timers, and dynamic UI behavior built with JavaScript.
 
 👉 **Live Demo:** https://itssonyamisyura.github.io/Window_project/  
 👉 **Repository:** https://github.com/itssonyamisyura/Window_project  
@@ -9,23 +9,28 @@ A web application with modal windows, interactive UI elements, and dynamic conte
 
 ## 🚀 About
 
-This project is a frontend application that demonstrates working with modal windows, event handling, and dynamic UI updates using pure JavaScript.
+This project is a frontend application that demonstrates building interactive UI components and handling user interactions using pure JavaScript.
+
+The application combines multiple features such as modals, forms, timers, and image interactions to simulate real-world UI behavior.
 
 The app demonstrates:
 
-- Handling user interactions  
+- DOM manipulation  
+- Event handling  
+- Working with forms and sending data  
 - Managing UI state  
-- Working with DOM events  
-- Building reusable components  
+- Building reusable JavaScript modules  
 
 ---
 
 ## ✨ Features
 
 - 🪟 Modal windows (open / close logic)  
-- 🖱️ Event handling (click, keyboard, overlay)  
-- 📊 Dynamic UI updates  
-- ⚡ Modular JavaScript architecture  
+- 📝 Forms with data submission  
+- ⏱️ Countdown timer  
+- 🖼️ Image gallery with zoom on click  
+- ⚡ Dynamic UI updates  
+- 🎬 Smooth animations and transitions  
 - 📱 Responsive layout  
 
 ---
@@ -37,10 +42,10 @@ The app demonstrates:
 - HTML5  
 - CSS / SCSS  
 
-### Build Tools
-- Gulp (task runner)  
-- Webpack (bundling)  
-- Babel (transpilation)  
+### Tools
+- Modular JavaScript structure  
+- DOM API  
+- Fetch / AJAX (data handling)  
 
 ---
 
@@ -48,5 +53,4 @@ The app demonstrates:
 
 ```bash
 git clone https://github.com/itssonyamisyura/Window_project.git
-npm install
-npx gulp build
+cd Window_project
